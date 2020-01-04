@@ -1,6 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn, Unique, OneToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, Unique, OneToOne, JoinColumn, OneToMany } from 'typeorm';
 import { UserEntity } from './user.entity';
 import { Product } from './product.entity';
+import { ProductToShoppingCart } from './productToShoppingCatr.entity';
 
 @Entity({name: 'ShoppingCart'})
 export class ShoppingCart {
@@ -14,4 +15,7 @@ export class ShoppingCart {
   @OneToOne(type => Product)
   @JoinColumn()
   products: Product;
+
+  @OneToMany(type => ProductToShoppingCart, productToShoppingCart => productToShoppingCart.shoppingCart)
+  public porductToShoppingCart: ProductToShoppingCart[];
 }

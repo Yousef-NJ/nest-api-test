@@ -7,6 +7,10 @@ enum Roles {
     user = 'user',
     }
 
+enum Status {
+  active = 'active',
+  blocked = 'blocked',
+}
 @Entity({name: 'Users'})
 @Unique(['email' , 'mobile'])
 export class UserEntity {
@@ -24,6 +28,13 @@ export class UserEntity {
 
   @Column({ length: 100 , nullable: true , unique: true })
   mobile: string;
+
+  @Column({
+    type: 'enum',
+    enum: Status,
+    default: Status.active,
+    })
+  status: Status;
 
   @Column({
     type: 'enum',

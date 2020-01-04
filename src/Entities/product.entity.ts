@@ -1,5 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn, Unique, OneToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, Unique, OneToOne, JoinColumn, OneToMany, ManyToOne } from 'typeorm';
 import { Category } from './category.entity';
+import { Image } from './image.entity';
+import { ProductToShoppingCart } from './productToShoppingCatr.entity';
 
 @Entity({name: 'Product'})
 export class Product {
@@ -30,4 +32,13 @@ export class Product {
     @OneToOne(type => Category)
     @JoinColumn()
     category: Category;
+
+    @OneToMany(type => ProductToShoppingCart, productToShoppingCart => productToShoppingCart.product)
+    public productToShoppingCart: ProductToShoppingCart[];
+
+    @OneToMany(type => Image , image => image.productImage)
+    public productImage: Image [];
+
+    @ManyToOne(type => Category , category => category.productCategory )
+    public categoryProduct: Category;
 }

@@ -27,9 +27,12 @@ import { DiscountCodeModule } from './modules/discount-code/discount-code.module
 import { ShoppingCartService } from './services/shopping-cart/shopping-cart.service';
 import { ShoppingCartController } from './controllers/shopping-cart/shopping-cart.controller';
 import { ShoppingCartModule } from './modules/shopping-cart/shopping-cart.module';
-import { OrderModule } from './module/order/order.module';
+import { OrderModule } from './modules/order/order.module';
 import { OrderController } from './controllers/order/order.controller';
 import { OrderService } from './Services/order/order.service';
+import { ProductToShoppingCart } from './Entities/productToShoppingCatr.entity';
+import { UserService } from './services/user/user.service';
+import { UserController } from './controllers/user/user.controller';
 
 @Module({
   imports: [
@@ -40,7 +43,7 @@ import { OrderService } from './Services/order/order.service';
     username: 'root',
     password: '',
     database: 'Sallatiy',
-    entities: [UserEntity , Category , Image , Product , Order , ShoppingCart , DiscountCode ],
+    entities: [UserEntity , Category , Image , Product , Order , ShoppingCart , DiscountCode , ProductToShoppingCart],
     synchronize: true,
   }),
     UsersModule,
@@ -52,8 +55,7 @@ import { OrderService } from './Services/order/order.service';
     DiscountCodeModule,
     ShoppingCartModule,
 ],
-  // tslint:disable-next-line: max-line-length
-  controllers: [AppController, RegistrationController , OrderController , ProductController, ImageController, CategoryController, DiscountCodeController, ShoppingCartController],
-  providers: [AppService , ProductService, OrderService, ImageService, CategoryService, DiscountCodeService, ShoppingCartService],
+  controllers: [AppController, RegistrationController  ],
+  providers: [AppService ],
 })
 export class AppModule {}
