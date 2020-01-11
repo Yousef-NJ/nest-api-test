@@ -1,5 +1,13 @@
 import { Image } from './image.entity';
-import { Entity, Column, PrimaryGeneratedColumn, Unique, OneToOne, JoinColumn, OneToMany } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  Unique,
+  OneToOne,
+  JoinColumn,
+  OneToMany,
+} from 'typeorm';
 import { Product } from './product.entity';
 @Entity()
 export class Category {
@@ -18,10 +26,16 @@ export class Category {
   @Column('text')
   descriptionArabic: string;
 
+  @Column()
+  imageId: number;
+
   @OneToOne(type => Image)
   @JoinColumn()
   image: Image;
 
-  @OneToMany(type => Product , product => product.categoryProduct)
+  @OneToMany(
+    type => Product,
+    product => product.categoryProduct,
+  )
   productCategory: Product;
 }

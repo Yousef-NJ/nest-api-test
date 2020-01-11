@@ -8,7 +8,7 @@ import { UserService } from 'src/services/user/user.service';
       type: UserEntity,
     },
   })
-@Controller('user')
+@Controller('users')
 export class UserController {
     constructor(public service: UserService) {}
 }

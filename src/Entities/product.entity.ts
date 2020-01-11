@@ -1,14 +1,23 @@
-import { Entity, Column, PrimaryGeneratedColumn, Unique, OneToOne, JoinColumn, OneToMany, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  Unique,
+  OneToOne,
+  JoinColumn,
+  OneToMany,
+  ManyToOne,
+} from 'typeorm';
 import { Category } from './category.entity';
 import { Image } from './image.entity';
 import { ProductToShoppingCart } from './productToShoppingCatr.entity';
 
-@Entity({name: 'Product'})
+@Entity({ name: 'Product' })
 export class Product {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ length: 100 , unique: true})
+  @Column({ length: 100 })
   titleEnglish: string;
 
   @Column({ length: 100 })
@@ -23,22 +32,30 @@ export class Product {
   @Column()
   availability: number;
 
-  @Column()
+  @Column('float')
   priceJD: number;
 
-  @Column()
+  @Column('float')
   priceSAR: number;
 
-    @OneToOne(type => Category)
-    @JoinColumn()
-    category: Category;
+  @Column()
+  categoryProductId: number;
 
-    @OneToMany(type => ProductToShoppingCart, productToShoppingCart => productToShoppingCart.product)
-    public productToShoppingCart: ProductToShoppingCart[];
+  @OneToMany(
+    type => ProductToShoppingCart,
+    productToShoppingCart => productToShoppingCart.product,
+  )
+  public productToShoppingCart: ProductToShoppingCart[];
 
-    @OneToMany(type => Image , image => image.productImage)
-    public productImage: Image [];
+  @OneToMany(
+    type => Image,
+    image => image.productImage,
+  )
+  public productImage: Image[];
 
-    @ManyToOne(type => Category , category => category.productCategory )
-    public categoryProduct: Category;
+  @ManyToOne(
+    type => Category,
+    category => category.productCategory,
+  )
+  public categoryProduct: Category;
 }

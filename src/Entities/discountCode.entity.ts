@@ -1,6 +1,13 @@
-import { Entity, Column, PrimaryGeneratedColumn, Unique, OneToOne, JoinColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  Unique,
+  OneToOne,
+  JoinColumn,
+} from 'typeorm';
 
-@Entity({name: 'DiscountCode'})
+@Entity({ name: 'DiscountCode' })
 export class DiscountCode {
   @PrimaryGeneratedColumn()
   id: number;
@@ -8,6 +15,6 @@ export class DiscountCode {
   @Column({ length: 100 })
   code: string;
 
-  @Column()
+  @Column('float')
   Percentage: number;
 }
