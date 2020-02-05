@@ -6,6 +6,8 @@ import {
   UseInterceptors,
   UploadedFile,
   UploadedFiles,
+  Request,
+  Put,
 } from '@nestjs/common';
 import { AppService } from './app.service';
 import { AuthGuard } from '@nestjs/passport';
@@ -15,13 +17,33 @@ import { v4 } from 'uuid';
 import { fromBuffer } from 'file-type';
 import { EntityManager } from 'typeorm';
 import { Image } from './Entities/image.entity';
+import { UsersService } from './Services/Auth/users.service';
+import { AuthService } from './Services/Auth/auth.service';
+import { getConnection } from 'typeorm';
 
 @Controller()
 export class AppController {
+  auth: AuthService;
+  private users: UsersService;
   constructor(
     private readonly appService: AppService,
     private entityManager: EntityManager,
   ) {}
+  /*
+  @UseGuards(AuthGuard('local'))
+  @Post('auth/login')
+  async login(@Request() req) {
+    // return this.auth.validateUser(req.email, req.password);
+    // console.log(req.email + ' a ' + req.password);
+    // return { email: req.email, password: req.password };
+    // return req.user;
+  }
+*/
+  @UseGuards(AuthGuard('jwt'))
+  @Get('profile')
+  getProfile(@Request() req) {
+    return req.user;
+  }
 
   @UseGuards(AuthGuard('jwt'))
   @Get()
@@ -58,5 +80,17 @@ export class AppController {
     files.forEach(file => {
       this.saveFile(file);
     });
+  }
+
+  @Put('updateImage')
+  async updateImage(@Request() req: any) {
+    await getConnection()
+      .createQueryBuilder()
+      .update(Image)
+      .set({
+        productImageId: req.productImageId,
+      })
+      .where('id = :id', { id: req.id })
+      .execute();
   }
 }

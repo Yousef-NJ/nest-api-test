@@ -1,9 +1,18 @@
-import { Entity, Column, PrimaryGeneratedColumn, Unique, OneToOne, JoinColumn, OneToMany } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  Unique,
+  OneToOne,
+  JoinColumn,
+  OneToMany,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm';
 import { UserEntity } from './user.entity';
 import { Product } from './product.entity';
-import { ProductToShoppingCart } from './productToShoppingCatr.entity';
 
-@Entity({name: 'ShoppingCart'})
+@Entity({ name: 'ShoppingCart' })
 export class ShoppingCart {
   @PrimaryGeneratedColumn()
   id: number;
@@ -11,11 +20,16 @@ export class ShoppingCart {
   @OneToOne(type => UserEntity)
   @JoinColumn()
   user: UserEntity;
-/*TODO MANY TO MANY */
+
+  /*TODO MANY TO MANY 
   @OneToOne(type => Product)
   @JoinColumn()
-  products: Product;
-
-  @OneToMany(type => ProductToShoppingCart, productToShoppingCart => productToShoppingCart.shoppingCart)
-  public porductToShoppingCart: ProductToShoppingCart[];
+  products: Product;*/
+  @ManyToMany(type => Product, { cascade: true })
+  @JoinTable({
+    name: 'product_cart',
+    joinColumn: { name: 'cartId', referencedColumnName: 'id' },
+    inverseJoinColumn: { name: 'productId', referencedColumnName: 'id' },
+  })
+  public product: Product[];
 }

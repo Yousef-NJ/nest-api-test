@@ -9,6 +9,7 @@ import {
   OneToMany,
 } from 'typeorm';
 import { Product } from './product.entity';
+import { UserEntity } from './user.entity';
 @Entity()
 export class Category {
   @PrimaryGeneratedColumn()

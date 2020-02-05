@@ -1,4 +1,4 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Patch } from '@nestjs/common';
 import { Crud } from '@nestjsx/crud';
 import { Category } from 'src/Entities/category.entity';
 import { CategoryService } from 'src/services/category/category.service';

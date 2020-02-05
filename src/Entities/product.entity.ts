@@ -10,7 +10,6 @@ import {
 } from 'typeorm';
 import { Category } from './category.entity';
 import { Image } from './image.entity';
-import { ProductToShoppingCart } from './productToShoppingCatr.entity';
 
 @Entity({ name: 'Product' })
 export class Product {
@@ -41,12 +40,12 @@ export class Product {
   @Column()
   categoryProductId: number;
 
-  @OneToMany(
+  /*@OneToMany(
     type => ProductToShoppingCart,
     productToShoppingCart => productToShoppingCart.product,
   )
   public productToShoppingCart: ProductToShoppingCart[];
-
+*/
   @OneToMany(
     type => Image,
     image => image.productImage,

@@ -1,4 +1,4 @@
-import { Entity, Column, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+/*import { Entity, Column, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 import { ShoppingCart } from './ShoppingCart.entity';
 import { Product } from './product.entity';
@@ -14,3 +14,4 @@ export class ProductToShoppingCart {
     @ManyToOne(type => ShoppingCart, shoppingCart => shoppingCart.porductToShoppingCart)
     public shoppingCart: ShoppingCart;
 }
+*/

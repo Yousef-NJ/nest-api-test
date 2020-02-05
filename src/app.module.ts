@@ -30,22 +30,32 @@ import { ShoppingCartModule } from './modules/shopping-cart/shopping-cart.module
 import { OrderModule } from './modules/order/order.module';
 import { OrderController } from './controllers/order/order.controller';
 import { OrderService } from './Services/order/order.service';
-import { ProductToShoppingCart } from './Entities/productToShoppingCatr.entity';
+// import { ProductToShoppingCart } from './Entities/productToShoppingCatr.entity';
 import { UserService } from './services/user/user.service';
 import { UserController } from './controllers/user/user.controller';
+import { AuthController } from './controllers/auth/auth.controller';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-    type: 'mysql',
-    host: 'localhost',
-    port: 3306,
-    username: 'root',
-    password: '',
-    database: 'Sallatiy',
-    entities: [UserEntity , Category , Image , Product , Order , ShoppingCart , DiscountCode , ProductToShoppingCart],
-    synchronize: true,
-  }),
+      type: 'mysql',
+      host: '127.0.0.1',
+      port: 3306,
+      username: 'root',
+      password: '12345678',
+      database: 'Sallatiy',
+      entities: [
+        UserEntity,
+        Category,
+        Image,
+        Product,
+        Order,
+        ShoppingCart,
+        DiscountCode,
+        // ProductToShoppingCart,
+      ],
+      synchronize: true,
+    }),
     UsersModule,
     AuthModule,
     OrderModule,
@@ -54,8 +64,8 @@ import { UserController } from './controllers/user/user.controller';
     CategoryModule,
     DiscountCodeModule,
     ShoppingCartModule,
-],
-  controllers: [AppController, RegistrationController  ],
-  providers: [AppService ],
+  ],
+  controllers: [AppController, RegistrationController, AuthController],
+  providers: [AppService],
 })
 export class AppModule {}

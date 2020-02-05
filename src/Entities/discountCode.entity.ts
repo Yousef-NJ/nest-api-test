@@ -16,5 +16,5 @@ export class DiscountCode {
   code: string;
 
   @Column('float')
-  Percentage: number;
+  percentage: number;
 }
