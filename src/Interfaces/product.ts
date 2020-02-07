@@ -9,5 +9,5 @@ export interface Products {
   availability: number;
   priceJD: number;
   priceSAR: number;
-  ategory: Category;
+  category: Category;
 }

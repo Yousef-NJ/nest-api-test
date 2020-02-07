@@ -1,17 +1,22 @@
-/*import { Entity, Column, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 import { ShoppingCart } from './ShoppingCart.entity';
 import { Product } from './product.entity';
 
 @Entity()
 export class ProductToShoppingCart {
-    @PrimaryGeneratedColumn()
-    public productToShoppingCart!: number;
+  @PrimaryGeneratedColumn()
+  public id: number;
 
-    @ManyToOne(type => Product, product => product.productToShoppingCart)
-    public product: Product;
+  @ManyToOne(
+    type => Product,
+    product => product.id,
+  )
+  public product: Product;
 
-    @ManyToOne(type => ShoppingCart, shoppingCart => shoppingCart.porductToShoppingCart)
-    public shoppingCart: ShoppingCart;
+  @ManyToOne(
+    type => ShoppingCart,
+    shoppingCart => shoppingCart.id,
+  )
+  public shoppingCart: ShoppingCart;
 }
-*/

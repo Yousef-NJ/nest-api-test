@@ -30,10 +30,11 @@ import { ShoppingCartModule } from './modules/shopping-cart/shopping-cart.module
 import { OrderModule } from './modules/order/order.module';
 import { OrderController } from './controllers/order/order.controller';
 import { OrderService } from './Services/order/order.service';
-// import { ProductToShoppingCart } from './Entities/productToShoppingCatr.entity';
+import { ProductToShoppingCart } from './Entities/productToShoppingCatr.entity';
 import { UserService } from './services/user/user.service';
 import { UserController } from './controllers/user/user.controller';
 import { AuthController } from './controllers/auth/auth.controller';
+import { ProductToShoppingCartModule } from './modules/product-to-shopping-cart/product-to-shopping-cart.module';
 
 @Module({
   imports: [
@@ -52,7 +53,7 @@ import { AuthController } from './controllers/auth/auth.controller';
         Order,
         ShoppingCart,
         DiscountCode,
-        // ProductToShoppingCart,
+        ProductToShoppingCart,
       ],
       synchronize: true,
     }),
@@ -64,6 +65,7 @@ import { AuthController } from './controllers/auth/auth.controller';
     CategoryModule,
     DiscountCodeModule,
     ShoppingCartModule,
+    ProductToShoppingCartModule,
   ],
   controllers: [AppController, RegistrationController, AuthController],
   providers: [AppService],

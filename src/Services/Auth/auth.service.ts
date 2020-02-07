@@ -20,6 +20,9 @@ export class AuthService {
       if (!userData) {
         return { status: 404 };
       }
+      if (userData.password !== user.password) {
+        return { status: 404 };
+      }
       const payload = {
         id: userData.id,
         username: userData.username,

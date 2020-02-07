@@ -21,10 +21,6 @@ export class ShoppingCart {
   @JoinColumn()
   user: UserEntity;
 
-  /*TODO MANY TO MANY 
-  @OneToOne(type => Product)
-  @JoinColumn()
-  products: Product;*/
   @ManyToMany(type => Product, { cascade: true })
   @JoinTable({
     name: 'product_cart',
