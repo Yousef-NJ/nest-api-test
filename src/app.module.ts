@@ -40,11 +40,11 @@ import { ProductToShoppingCartModule } from './modules/product-to-shopping-cart/
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: '127.0.0.1',
+      host: 'database-1.coml493lfegv.us-east-2.rds.amazonaws.com',
       port: 3306,
-      username: 'root',
-      password: '12345678',
-      database: 'Sallatiy',
+      username: 'admin',
+      password: '12345678mmm',
+      database: 'database-1',
       entities: [
         UserEntity,
         Category,
