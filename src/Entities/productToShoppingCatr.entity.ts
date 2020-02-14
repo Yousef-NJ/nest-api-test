@@ -19,4 +19,7 @@ export class ProductToShoppingCart {
     shoppingCart => shoppingCart.id,
   )
   public shoppingCart: ShoppingCart;
+
+  @Column({ default: 1 })
+  public quantity: number;
 }

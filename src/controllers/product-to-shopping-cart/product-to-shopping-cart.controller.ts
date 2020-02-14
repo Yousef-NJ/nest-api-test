@@ -7,6 +7,9 @@ import { ProductToShoppingCart } from 'src/Entities/productToShoppingCatr.entity
   model: {
     type: ProductToShoppingCart,
   },
+  query: {
+    join: { product: { eager: true } },
+  },
 })
 @Controller('product-to-shopping-cart')
 export class ProductToShoppingCartController {
