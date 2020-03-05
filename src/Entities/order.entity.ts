@@ -1,7 +1,17 @@
-import { Entity, Column, PrimaryGeneratedColumn, Unique, OneToOne, JoinColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  Unique,
+  OneToOne,
+  JoinColumn,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm';
 import { Category } from './category.entity';
 import { UserEntity } from './user.entity';
 import { DiscountCode } from './discountCode.entity';
+import { Product } from './product.entity';
 
 enum orderStatus {
   Canceled,
@@ -11,7 +21,7 @@ enum orderStatus {
   Waiting,
 }
 
-@Entity({name: 'Order'})
+@Entity({ name: 'Order' })
 export class Order {
   @PrimaryGeneratedColumn()
   id: number;
@@ -41,11 +51,19 @@ export class Order {
   @Column()
   Status: orderStatus;
 
-    @OneToOne(type => Category)
-    @JoinColumn()
-    category: Category;
+  @OneToOne(type => Category)
+  @JoinColumn()
+  category: Category;
 
-    @OneToOne(type => DiscountCode)
-    @JoinColumn()
-    discountCode: DiscountCode;
+  @OneToOne(type => DiscountCode)
+  @JoinColumn()
+  discountCode: DiscountCode;
+
+  @ManyToMany(type => Product, { cascade: true })
+  @JoinTable({
+    name: 'product_order',
+    joinColumn: { name: 'orderId', referencedColumnName: 'id' },
+    inverseJoinColumn: { name: 'productId', referencedColumnName: 'id' },
+  })
+  public product: Product[];
 }

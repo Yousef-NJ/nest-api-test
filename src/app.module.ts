@@ -35,16 +35,20 @@ import { UserService } from './services/user/user.service';
 import { UserController } from './controllers/user/user.controller';
 import { AuthController } from './controllers/auth/auth.controller';
 import { ProductToShoppingCartModule } from './modules/product-to-shopping-cart/product-to-shopping-cart.module';
+import { ProductToOrderService } from './services/product-to-order/product-to-order.service';
+import { ProductToOrderController } from './controllers/product-to-order/product-to-order.controller';
+import { ProductToOrderModule } from './modules/product-to-order/product-to-order.module';
+import { ProductToOrder } from './Entities/productToOrder.entity';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'database-1.coml493lfegv.us-east-2.rds.amazonaws.com',
-      port: 3306,
-      username: 'admin',
-      password: '12345678mmm',
-      database: 'database-1',
+      host: '127.0.0.1',
+      port: 5678,
+      username: 'root',
+      password: '',
+      database: 'Sallatiy',
       entities: [
         UserEntity,
         Category,
@@ -54,6 +58,7 @@ import { ProductToShoppingCartModule } from './modules/product-to-shopping-cart/
         ShoppingCart,
         DiscountCode,
         ProductToShoppingCart,
+        ProductToOrder,
       ],
       synchronize: true,
     }),
@@ -66,6 +71,7 @@ import { ProductToShoppingCartModule } from './modules/product-to-shopping-cart/
     DiscountCodeModule,
     ShoppingCartModule,
     ProductToShoppingCartModule,
+    ProductToOrderModule,
   ],
   controllers: [AppController, RegistrationController, AuthController],
   providers: [AppService],
