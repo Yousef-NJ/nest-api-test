@@ -5,7 +5,9 @@ import {
   Unique,
   OneToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
+import { Order } from './order.entity';
 
 @Entity({ name: 'DiscountCode' })
 export class DiscountCode {
@@ -17,4 +19,10 @@ export class DiscountCode {
 
   @Column('float')
   percentage: number;
+
+  @OneToMany(
+    type => Order,
+    order => order.discountCode,
+  )
+  public orderDiscountCode: Order;
 }

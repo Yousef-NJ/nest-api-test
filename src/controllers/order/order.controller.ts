@@ -4,11 +4,19 @@ import { Order } from 'src/Entities/order.entity';
 import { OrderService } from 'src/Services/order/order.service';
 
 @Crud({
-    model: {
-      type: Order,
+  model: {
+    type: Order,
+  },
+  query: {
+    join: {
+      categoryOrdar: { eager: true },
+      discountCode: { eager: true },
+      product: { eager: true },
+      userOrder: { eager: true },
     },
-  })
+  },
+})
 @Controller('order')
 export class OrderController {
-    constructor(public service: OrderService) {}
+  constructor(public service: OrderService) {}
 }

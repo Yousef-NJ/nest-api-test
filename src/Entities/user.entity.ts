@@ -5,8 +5,10 @@ import {
   Unique,
   OneToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 import { Category } from './category.entity';
+import { Order } from './order.entity';
 
 export enum Roles {
   main_admin = 'main_admin',
@@ -59,4 +61,10 @@ export class UserEntity {
   @OneToOne(type => Category)
   @JoinColumn()
   category: Category;
+
+  @OneToMany(
+    type => Order,
+    order => order.userOrder,
+  )
+  orderForUser: Order;
 }

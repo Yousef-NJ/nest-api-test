@@ -10,6 +10,7 @@ import {
 } from 'typeorm';
 import { Product } from './product.entity';
 import { UserEntity } from './user.entity';
+import { Order } from './order.entity';
 @Entity()
 export class Category {
   @PrimaryGeneratedColumn()
@@ -39,4 +40,10 @@ export class Category {
     product => product.categoryProduct,
   )
   productCategory: Product;
+
+  @OneToMany(
+    type => Order,
+    order => order.categoryOrdar,
+  )
+  orderCategory: Order;
 }

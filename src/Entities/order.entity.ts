@@ -7,6 +7,7 @@ import {
   JoinColumn,
   ManyToMany,
   JoinTable,
+  ManyToOne,
 } from 'typeorm';
 import { Category } from './category.entity';
 import { UserEntity } from './user.entity';
@@ -14,11 +15,10 @@ import { DiscountCode } from './discountCode.entity';
 import { Product } from './product.entity';
 
 enum orderStatus {
-  Canceled,
-  Delivered,
-  Shipped,
-  Processing,
-  Waiting,
+  PINDING,
+  PROSSISING,
+  SHIPPED,
+  CANCELED,
 }
 
 @Entity({ name: 'Order' })
@@ -26,38 +26,53 @@ export class Order {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @OneToOne(type => UserEntity)
-  @JoinColumn()
-  user: UserEntity;
-
   @Column({ length: 100 })
-  titleArabic: string;
+  name: string;
 
   @Column('text')
   shippingAddress: string;
 
   @Column('text')
-  billingAddress: string;
+  email: string;
+
+  @Column('text')
+  phone: string;
+
+  @Column('text')
+  city: string;
+
+  @Column('text')
+  country: string;
+
+  @Column('text')
+  note: string;
 
   @Column('text')
   paymentMethod: string;
 
-  @Column()
+  @Column('float')
   discount: number;
 
-  @Column()
+  @Column('float')
   totalPrice: number;
 
   @Column()
-  Status: orderStatus;
+  status: orderStatus;
 
-  @OneToOne(type => Category)
-  @JoinColumn()
-  category: Category;
+  @Column()
+  date: Date;
 
-  @OneToOne(type => DiscountCode)
-  @JoinColumn()
-  discountCode: DiscountCode;
+  @ManyToOne(
+    type => Category,
+    category => category.orderCategory,
+  )
+  public categoryOrdar: Category;
+
+  @ManyToOne(
+    type => DiscountCode,
+    discountCode => discountCode.orderDiscountCode,
+  )
+  public discountCode: Category;
 
   @ManyToMany(type => Product, { cascade: true })
   @JoinTable({
@@ -66,4 +81,10 @@ export class Order {
     inverseJoinColumn: { name: 'productId', referencedColumnName: 'id' },
   })
   public product: Product[];
+
+  @ManyToOne(
+    type => UserEntity,
+    user => user.orderForUser,
+  )
+  public userOrder: UserEntity;
 }
